@@ -66,6 +66,24 @@ def generateProfile(etudiant):
         embed.add_field(name=matiere.getNom(), value=str(matiere))
     return embed
 
+def generateBlueText(txt):
+    return "```CSS\n- " + str(txt) + " -\n```"
+
+def generateRedText(txt):
+    return "```diff\n- " + str(txt) + " -\n```"
+
+def generateMoyennes(etudiant):
+    embed = discord.Embed(title=etudiant.getNom(), description="Voilà tes moyennes !", color = discord.Color.red())
+    for matiere in etudiant.getMatieresListe():
+        moyenne = matiere.getMoyenne()
+        if moyenne >= 10:
+            embed.add_field(name=matiere.getNom(), value=generateBlueText(moyenne))
+        else:
+            embed.add_field(name=matiere.getNom(), value=generateRedText(moyenne))
+        
+    return embed
+
+
 def updateEtudiantList(etudiantList, etudiant):
     for i in range(len(etudiantList)):
         if etudiantList[i].getDiscordID() == etudiant.getDiscordID():

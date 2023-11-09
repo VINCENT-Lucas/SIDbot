@@ -51,7 +51,6 @@ async def r(ctx, *nom):
         return
     await user.send(f"Il y a eu une erreur lors de ton inscription.")
 
-
 @bot.command()
 async def notes(ctx):
     etudiantsList = loadEtudiantsListe()
@@ -122,20 +121,18 @@ async def ajouterNote(ctx):
     view = SelectMatiere()
     await ctx.send(view=view)
     
+@bot.command()
+async def voirMoyennes(ctx):
+    etudiantsList = loadEtudiantsListe()
+    etudiant = getEtudiant(ctx, etudiantsList)
 
-
+    if not etudiant:
+        await ctx.send("Ton profil n'est pas dans ma base de données, fais **/register [Nom Prénom]** pour en créer un !")
+        return
     
-            
-
-
-        
-
+    embed = generateMoyennes(etudiant)
+    await ctx.send(embed=embed)
 
 
 
-
-
-
-
-
-bot.run("Nzg2MjYyOTM1Mzc4MTk4NTQ5.GlyXTu.72uzaMoffLqNk7o-U1VzVVSqnKBZnVYkYmDmrM")
+bot.run("Nzg2MjYyOTM1Mzc4MTk4NTQ5.G0gXJM.TeqvyIJrRg2SB9hI5omMeL3zE6GOv4q_wbIKm0")

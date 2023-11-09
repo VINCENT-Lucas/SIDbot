@@ -39,9 +39,9 @@ class Matiere:
     def getMoyenne(self):
         sum = 0
         for elem in self.listeNotes:
-            if elem.getValeur():
+            if elem.getValeur() and elem.getCoeff():
                 sum += elem.getCoeff() * elem.getValeur()
-        return sum
+        return round(sum, 3)
     
     def getNom(self):
         return self.nom
